@@ -18,6 +18,8 @@ describe Rack::ExpireMessages do
   end
 
   it 'should redirect to the same url without the _message & _expire query string parameters' do
-    @client.get('/', :_message => :foo, :_expire => Time.now.to_i - 100).body
+    response = @client.get('/', :_message => :foo, :_expire => Time.now.to_i - 100)
+    response.should be_redirection
+    response.location.should == '/'
   end
 end
