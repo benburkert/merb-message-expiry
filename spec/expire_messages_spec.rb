@@ -22,4 +22,9 @@ describe Rack::ExpireMessages do
     response.should be_redirection
     response.location.should == '/'
   end
+
+  it 'should keep non _message & _expire query string parameters' do
+    response = @client.get('/', :_message => :foo, :keep => :true, :_expire => Time.now.to_i - 100)
+    response.location.should == '/?keep=true'
+  end
 end

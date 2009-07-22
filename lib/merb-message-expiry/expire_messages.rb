@@ -11,7 +11,7 @@ module Rack
     def call(env)
       if env['QUERY_STRING'] =~ MESSAGE_REGEX && env['QUERY_STRING'] =~ EXPIRE_REGEX
         if $1.to_i <= Time.now.to_i
-          url = env['PATH_INFO'] + env['QUERY_STRING'].gsub(MESSAGE_REGEX, '').gsub(EXPIRE_REGEX, '')
+          url = env['PATH_INFO'] + env['QUERY_STRING'].gsub(MESSAGE_REGEX, '').gsub(EXPIRE_REGEX, '').gsub(/^&/, '?')
           return [302, {'Location' => url}, ["<html><body>You are being <a href=\"#{url}\">redirected</a>.</body></html>"]]
         end
       end
