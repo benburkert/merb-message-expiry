@@ -3,7 +3,7 @@ if defined?(Merb::Plugins)
 
   require 'merb-message-expiry/controller_mixin'
   require 'merb-message-expiry/request_mixin'
-  require 'merb-message-expiry/rack'
+  require 'merb-message-expiry/expire_messages'
 
   class Merb::Controller
     include Merb::ControllerMessageExpiryMixin
